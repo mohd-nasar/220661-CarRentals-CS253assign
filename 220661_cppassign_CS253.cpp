@@ -381,10 +381,23 @@ void Car::addcar() {
     int fineperday, minimumCustoumerRating, dailycharge;
     std::cout << "Enter the model of the car : " << endl;
     std::cin >> model;
+    if(model.length()<3|| model.length()>30){
+        cout <<"Input length limit not satisfired"<<endl;
+        return;
+    }
     std::cout << "Enter FinePerDay after return date (int) : " << endl;
     std::cin >> fineperday;
+    if(fineperday<0 || fineperday>10000){
+        cout <<"Invalid Range "<<endl;
+        return;
+    }
+
     std::cout << "Enter minimum customer rating required (int) : " << endl;
     std::cin >> minimumCustoumerRating;
+    if(minimumCustoumerRating<0 || minimumCustoumerRating>5){
+        cout<<"Shuld be between 0 and 5"<<endl;
+        return;
+    }
     std::cout << "Enter the daily Rental charges of " << model << " (int) : " << endl;
     std::cin >> dailycharge;
     Car newcar(model, fineperday, dailycharge, minimumCustoumerRating);
@@ -398,12 +411,28 @@ void updatecar(Car& car) {
     int new_dailycharge;
     std::cout << "Enter the condition : " << endl;
     std::cin >> newcondition;
+    if(newcondition.length()<2||newcondition.length()>20){
+        cout<<"Enter a valid value"<<endl;
+        return;
+    }
     std::cout << "Update fine per day : " << endl;
     std::cin >> new_fineperday;
+    if(new_fineperday<0 || new_fineperday>199999){
+        cout<<"Enter a valid value"<<endl;
+        return;
+    }
     std::cout << "New Min. Custoumer Rating required : " << endl;
     std::cin >> new_minimumCustoumerRating;
+    if(new_minimumCustoumerRating<0 || new_minimumCustoumerRating >5){
+        cout<<"Should be between 0 and 5"<<endl;
+        return;
+    }
     std::cout << "Update the daily charge : " << endl;
     std::cin >> new_dailycharge;
+    if(new_dailycharge<0 || new_dailycharge>199999){
+        cout<<"Enter a valid input"<<endl;
+        return;
+    }
     car.setCondition(newcondition);
     car.setDailyCharge(new_dailycharge);
     car.setFinePerDay(new_fineperday);
@@ -500,10 +529,22 @@ void addUser(vector<T>& List) {
     int age;
     std::cout << "Enter the name: " << endl;
     std::cin >> name;
+    if(name.length()<3|| name.length()>30){
+        cout<<"should be between 3 to 30"<<endl;
+        return;
+    }
     std::cout << "Enter the password: " << endl;
     std::cin >> password;
+    if(password.length()<8||password.length()>20){
+        cout<<"Password should be 8 to 20 characters "<<endl;
+        return;
+    }
     std::cout << "Enter the age: " << endl;
     std::cin >> age;
+    if(age<10||age>150){
+        cout<<"Enter a reasonable age "<<endl;
+        return;
+    }
     T cus(name, age, password);
     std::cout << cus.getName() << " created successfully" << endl;
 }
@@ -785,7 +826,10 @@ void Manager::approveRentRequest(Car &car, Custoumer &custoumer) {
 
 void displayManagers() {
     for (const auto &manager : Manager::managerslists) {
-        std::cout << "Manager ID : " << manager.getID() << " Name : " << manager.getName() << " Age : " << manager.getAge() << endl;
+        cout << "Manager ID :   " << manager.getID() <<endl;
+        cout<< "Name :          " << manager.name <<endl;
+        cout<< "Age :           " << manager.age << endl;
+        cout<<"\t----------------------------------"<<endl;
     }
 }
 
@@ -815,7 +859,7 @@ void displaycars() {
             }
         }
     }
-    std::cout << "Enter the Car Model to get Details" << endl;
+   std::cout << "Enter the Car Model to get Details" << endl;
 }
 
 void Car::showpendingrequests() {
@@ -846,7 +890,7 @@ void employeedashboard(Manager &manager) {
     std::cout << "2> Delete Employee " << endl;
     std::cout << "3> Modify Employee Details " << endl;
     std::cout << "4> See all Employee " << endl;
-    std::cout << "5> Go back "<<endl;
+    std::cout << "5> Go back (or Enter any other Integar ) "<<endl;
     std::cout << "You need to visit a particular Employee to see details " << endl;
 
     std::cout << endl;
@@ -889,7 +933,7 @@ void custoumerdashboard(Manager &manager) {
     std::cout << "2> Delete Custoumer " << endl;
     std::cout << "3> Modify Custoumer Details " << endl;
     std::cout << "4> See all Custoumer " << endl;
-    std::cout << "5> Go back "<<endl;
+    std::cout << "Input any integar to go back "<<endl;
     std::cout << "You need to visit a particular custoumer to see details " << endl;
 
     std::cout << endl;
@@ -933,7 +977,7 @@ void carsdashboard(Manager &manager) {
     std::cout << "3> Delete a car " << endl;
     std::cout << "4> Approve a Rent Request" << endl;
     std::cout << "5> Display All cars in Inventory"<<endl;
-    std::cout << "6> Log out "<<endl;
+    std::cout << "Enter any other integar to LogOut "<<endl;
     std::cout << "\n\n";
     int userResponse;
     string selectedmodel;
@@ -1027,7 +1071,7 @@ void managerdashboard(Manager &manager) {
     std::cout << "1> Visit Employee Dashboard " << endl;
     std::cout << "2> Visit Custoumer Dashboard " << endl;
     std::cout << "3> Visit Car Inventory " << endl;
-    std::cout << "4> Logut "<<endl;
+    std::cout << "Enter any other integar to Logout "<<endl;
     std::cout << "5> Exit "<<endl;
     std::cout << endl;
     std::cout << "NOTE: you need to visit the particular page to perform operations" << endl;
@@ -1049,20 +1093,17 @@ void managerdashboard(Manager &manager) {
 
         case 2:
             custoumerdashboard(manager);
-            
             break;
 
         case 3:
             carsdashboard(manager);
-            break;
-        case 4:
-            std::cout << "loging out\n"<<endl;
             break;
         case 5:
             std::cout <<"Exiting the program\n"<<endl;
             exit(0);
             break;    
         default:
+            std::cout << "loging out\n"<<endl;
             break;
     }
     return;
@@ -1077,17 +1118,32 @@ void managerpage(){
     string name;
     int age;
     string password;
-    std::cout<<"Enter Your ID to login into managers dashboard"<<endl;
     displayManagers();
+    std::cout<<"Enter Your ID to login into managers dashboard"<<endl;
     std::cout<<"New Manager? Enter 'Register' to Create Account or go 'Back'"<<endl;
     std::cin>>userResponse;
     if(userResponse == "Register"){
         std::cout<<"Enter your name "<<endl;
         std::cin>>name;
+        if(name.length()<3 || name.length() > 30){
+            cout << "Should be between 3 to 30 characters"<<endl;
+            managerpage();
+            return;
+        }
         std::cout<<"Enter your age "<<endl;
         std::cin>>age;
+        if(age<10||age>150){
+            cout<<"Enter a reasonable age"<<endl;
+            managerpage();
+            return;
+        }
         std::cout<<"Enter password"<<endl;
         std::cin>>password;
+        if(password.length() <8 || password.length() >20){
+            cout<<"Password length should be 8 to 20 characters  "<<endl;
+            managerpage();
+            return;
+        }
         Manager(name,age,password);
         std::cout<<"Account created successfully please remember your password "<<endl;
         managerpage();
@@ -1138,7 +1194,7 @@ void userLoginPage(Custoumer* custoumer) {
     std::cout << "5> Show total Amount" << endl;
     std::cout << "6> Show pending Requests "<<endl;
     std::cout << "7> View Profile "<<endl;
-    std::cout << "8> Logout"<<endl;
+    std::cout << "Enter any other integer to LogOut"<<endl;
     std::cout << "9> Exit"<<endl;
     //std::cout << "Note: ENTER ANY OTHER INT TO GO TO HOMEPAGE"<<endl;
     std::cout << "\n\n";
@@ -1207,13 +1263,11 @@ void userLoginPage(Custoumer* custoumer) {
             custoumer->getUserDetail();
             userLoginPage(custoumer);
             break;  
-        case 8:
-             std::cout <<"Logout successful"<<endl;
-             break; 
         case 9:
              std::cout <<"Exiting the program"<<endl;
              exit(0);             
         default:
+            std::cout <<"Logout successful"<<endl;
             break;
     }
     return;
@@ -1294,10 +1348,25 @@ void custoumerpage() {
     if (userResponse == "Register") {
         std::cout << "Enter your name " << endl;
         std::cin >> name;
+        if(name.length()<3 || name.length()>30){
+            cout<<"name should be between 3 to 30 characters"<<endl;
+            custoumerpage();
+            return;
+        }
         std::cout << "Enter your age " << endl;
         std::cin >> age;
+        if(age<10||age>150){
+            cout<<"enter a reasonable age"<<endl;
+            custoumerpage();
+            return;
+        }
         std::cout << "Enter password" << endl;
         std::cin >> password;
+        if(password.length()<8 || password.length()>20){
+            cout<<"Password should be between 8 to 20 characters"<<endl;
+            custoumerpage();
+            return;
+        }
         Custoumer* newcustoumer = new Custoumer(name, age, password);
         std::cout << "Generated ID is " << newcustoumer->getID() << endl;
         std::cout << "Account created successfully please remember your password and ID for future login " << endl;
@@ -1336,7 +1405,6 @@ void custoumerpage() {
         }
     }
 }
-
 void homepage(){
     std::cout<<"       WELCOME TO CAR RENTALS      "<<endl;
     std::cout<<"1> Manager"<<endl;
@@ -1381,14 +1449,14 @@ void initiaizedata(){
     Custoumer ("user2",43,"user");
     Custoumer ("user3",24,"user");
     Custoumer ("user4",54,"user");
-    Employee ("employee1",32,"employee");
-    Employee ("employee2",24,"employee");
-    Employee ("employee3",34,"employee");
-    Employee ("employee4",33,"employee");
-    Employee ("employee5",43,"employee");
+    Employee ("emp1",23,"employee");
+    Employee ("emp2",34,"employee");
+    Employee ("emp3",24,"employee");
+    Employee ("emp4",28,"employee");
+    Employee ("emp5",43,"employee");
     Car("ferai",348,5,3);
     Car  ("lambo",283,4,3);
-    Car ("kurkure",883,2,4);
+    Car ("Zonda",883,2,4);
     Car ("crea",334,3,2);
     Car  ("suzuki",832,4,2);
 }
