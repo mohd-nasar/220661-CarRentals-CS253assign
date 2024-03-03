@@ -1336,6 +1336,7 @@ void custoumerpage() {
         }
     }
 }
+
 void homepage(){
     std::cout<<"       WELCOME TO CAR RENTALS      "<<endl;
     std::cout<<"1> Manager"<<endl;
@@ -1376,15 +1377,15 @@ void homepage(){
 void initiaizedata(){
     Manager manager("manger1",65,"manager");
     Custoumer ("nasar",32,"user");
-    Custoumer ("nasar",32,"user");
+    Custoumer ("user1",22,"user");
     Custoumer ("user2",43,"user");
     Custoumer ("user3",24,"user");
     Custoumer ("user4",54,"user");
-    Employee ("asd",2343,"employee");
-    Employee ("asd",2343,"employee");
-    Employee ("asd",2343,"employee");
-    Employee ("asd",2343,"employee");
-    Employee ("asd",2343,"employee");
+    Employee ("employee1",32,"employee");
+    Employee ("employee2",24,"employee");
+    Employee ("employee3",34,"employee");
+    Employee ("employee4",33,"employee");
+    Employee ("employee5",43,"employee");
     Car("ferai",348,5,3);
     Car  ("lambo",283,4,3);
     Car ("kurkure",883,2,4);
